@@ -1,0 +1,34 @@
+generated: '2026-08-12'
+method: probed
+source: live response headers on https://elixirmedical.com/wp-json/wp/v2
+limit_count: 0
+note: >-
+  Elixir Medical documents no rate limits — it has no developer documentation of any kind.
+  Ten live requests across /wp/v2/posts, /pages, /categories, /media, /users, /settings,
+  /types, /taxonomies and two 404 paths returned no X-RateLimit-*, no RateLimit-*, and no
+  Retry-After header. An honest zero: nothing is published and nothing is signalled at
+  runtime. A short burst of rapid requests did draw transient HTTP 403 HTML responses from
+  the WP Engine edge, which is edge bot-mitigation rather than a documented API quota, so
+  it is recorded as an observation and not as a limit.
+limits: []
+response_headers:
+  observed: []
+  absent:
+  - X-RateLimit-Limit
+  - X-RateLimit-Remaining
+  - X-RateLimit-Reset
+  - RateLimit-Limit
+  - RateLimit-Remaining
+  - RateLimit-Reset
+  - Retry-After
+exhaustion_status: null
+observations:
+- finding: >-
+    Transient 403 text/html responses from the WP Engine edge during rapid sequential
+    probing; requests succeeded again after pacing. Undocumented edge mitigation, not a
+    published quota.
+  status: 403
+  url: https://elixirmedical.com/wp-json/wp/v2
+- finding: 'Anonymous content reads are edge-cached: Cache-Control max-age=600, must-revalidate.'
+  status: 200
+  url: https://elixirmedical.com/wp-json/wp/v2/posts?per_page=1

@@ -1,0 +1,46 @@
+generated: '2026-08-12'
+method: probed
+source: https://elixirmedical.com/wp-json/wp/v2
+format: wordpress-rest-error
+rfc9457: false
+note: >-
+  Elixir Medical publishes no error reference — it has no developer documentation. The
+  envelope and codes below were observed live against elixirmedical.com/wp-json. This is
+  the WordPress REST error envelope, NOT RFC 9457 problem+json: the content type is
+  application/json and the HTTP status is carried inside `data.status` as well as on the
+  response line.
+envelope:
+  content_type: application/json
+  shape:
+    code: machine-readable error slug
+    message: human-readable sentence
+    data:
+      status: integer HTTP status, duplicated inside the body
+  example_probe: https://elixirmedical.com/wp-json/wp/v2/nonexistent
+problems:
+- status: 404
+  code: rest_no_route
+  title: No route was found matching the URL and request method.
+  observed_at: https://elixirmedical.com/wp-json/wp/v2/nonexistent
+  remediation: >-
+    Check the path against the live route descriptor at /wp-json/wp/v2; the namespace
+    exposes 136 routes but only the content subset is modelled in openapi/.
+- status: 404
+  code: rest_post_invalid_id
+  title: Invalid post ID.
+  observed_at: https://elixirmedical.com/wp-json/wp/v2/posts/999999999
+  source_operation: openapi/elixir-medical-wordpress-content-openapi.yml#getPostsId
+  remediation: List /wp/v2/posts first and use an id from the collection.
+- status: 401
+  code: rest_forbidden
+  title: Sorry, you are not allowed to do that.
+  observed_at: https://elixirmedical.com/wp-json/wp/v2/settings
+  remediation: >-
+    Privileged routes require WordPress application-password credentials; see
+    authentication/elixir-medical-authentication.yml.
+codes_not_observed:
+  note: >-
+    WordPress ships many further `rest_*` codes (rest_cannot_create, rest_invalid_param,
+    rest_comment_login_required and others). They are NOT listed here because they were
+    not observed on this host and Elixir Medical does not document them. Recording them
+    would be fabrication.

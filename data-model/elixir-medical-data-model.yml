@@ -1,0 +1,175 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/elixir-medical-wordpress-content-openapi.yml, plus the live
+  /wp/v2/types and /wp/v2/taxonomies registries on https://elixirmedical.com/wp-json
+note: >-
+  Entity graph of the only API surface Elixir Medical serves. Entity names, rest_base
+  values, hierarchy flags and type/taxonomy bindings are read verbatim from the site's own
+  registries — the relationships below are the ones WordPress itself declares, not
+  inferred. Only content entities are modelled; editor/admin plumbing types (templates,
+  blocks, fonts, global styles, navigation) are listed under `excluded` rather than
+  invented into the graph.
+id_scheme:
+  kind: integer
+  note: All entities key on a site-wide integer `id`. No prefixed or typed identifiers.
+entities:
+- name: post
+  label: Posts
+  rest_base: posts
+  path: /wp/v2/posts
+  hierarchical: false
+  count_observed: 52
+  note: >-
+    Carries the company's news, clinical-evidence summaries and open job postings —
+    press releases and careers share one post type on this install.
+  relationships:
+  - type: belongs_to
+    target: user
+    via: author
+  - type: has_many
+    target: category
+    via: categories
+  - type: has_many
+    target: tag
+    via: tags
+  - type: has_one
+    target: attachment
+    via: featured_media
+  - type: has_many
+    target: comment
+    via: post
+  - type: has_many
+    target: revision
+    via: parent
+- name: page
+  label: Pages
+  rest_base: pages
+  path: /wp/v2/pages
+  hierarchical: true
+  count_observed: 47
+  relationships:
+  - type: belongs_to
+    target: page
+    via: parent
+  - type: belongs_to
+    target: user
+    via: author
+  - type: has_one
+    target: attachment
+    via: featured_media
+  - type: has_many
+    target: revision
+    via: parent
+- name: attachment
+  label: Media
+  rest_base: media
+  path: /wp/v2/media
+  hierarchical: false
+  count_observed: 754
+  relationships:
+  - type: belongs_to
+    target: post
+    via: post
+  - type: belongs_to
+    target: user
+    via: author
+- name: category
+  label: Categories
+  rest_base: categories
+  path: /wp/v2/categories
+  taxonomy: true
+  hierarchical: true
+  count_observed: 22
+  applies_to:
+  - post
+  relationships:
+  - type: belongs_to
+    target: category
+    via: parent
+- name: tag
+  label: Tags
+  rest_base: tags
+  path: /wp/v2/tags
+  taxonomy: true
+  hierarchical: false
+  applies_to:
+  - post
+- name: comment
+  label: Comments
+  rest_base: comments
+  path: /wp/v2/comments
+  relationships:
+  - type: belongs_to
+    target: post
+    via: post
+  - type: belongs_to
+    target: comment
+    via: parent
+- name: user
+  label: Users
+  rest_base: users
+  path: /wp/v2/users
+  count_observed: 6
+  note: >-
+    Author records are readable anonymously (WordPress default). No user data is stored in
+    this repository — see the PII observation in
+    authentication/elixir-medical-authentication.yml.
+  relationships:
+  - type: has_many
+    target: post
+    via: author
+- name: wpfm_locations
+  label: Locations
+  rest_base: wpfm_locations
+  path: /wp/v2/wpfm_locations
+  hierarchical: false
+  note: >-
+    Custom post type backing the site's "Find a Doctor" locator — the one genuinely
+    domain-specific entity on this install.
+  relationships:
+  - type: has_many
+    target: wpfm_designations
+    via: wpfm_designations
+- name: wpfm_designations
+  label: Designations
+  rest_base: wpfm_designations
+  path: /wp/v2/wpfm_designations
+  taxonomy: true
+  hierarchical: true
+  applies_to:
+  - wpfm_locations
+registries:
+- name: types
+  path: /wp/v2/types
+  description: Self-describing registry of every post type, including rest_base and taxonomies.
+- name: taxonomies
+  path: /wp/v2/taxonomies
+  description: Self-describing registry of every taxonomy and the types it applies to.
+- name: statuses
+  path: /wp/v2/statuses
+  description: Publication status vocabulary.
+- name: search
+  path: /wp/v2/search
+  description: Cross-type search projection over posts, pages and terms.
+excluded:
+  reason: >-
+    WordPress editor/admin plumbing, present in the route descriptor but not part of the
+    company's content model.
+  types:
+  - nav_menu_item
+  - wp_block
+  - wp_template
+  - wp_template_part
+  - wp_global_styles
+  - wp_navigation
+  - wp_font_family
+  - wp_font_face
+  - e-floating-buttons
+  - elementor_library
+  - elementor_snippet
+  - elementskit_content
+  - elementskit_template
+  - popup
+  - popup_theme
+  - pum_cta

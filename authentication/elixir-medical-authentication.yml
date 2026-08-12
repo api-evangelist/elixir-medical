@@ -1,0 +1,48 @@
+generated: '2026-08-12'
+method: probed
+source: https://elixirmedical.com/wp-json/
+note: >-
+  Elixir Medical publishes no developer authentication documentation, because it runs no
+  developer program. This profile was assembled from the site's own WordPress REST discovery
+  document (which declares its authentication block) plus live anonymous probes of the
+  wp/v2 content routes. Every value below was observed, not assumed.
+summary:
+  types:
+  - http
+  - none
+  api_key_in: []
+  oauth2_flows: []
+  anonymous_read: true
+schemes:
+- name: anonymous
+  type: none
+  description: >-
+    Read operations on the wp/v2 content collections answer with no credential at all.
+    Observed live on posts, pages, media, categories, users, types and taxonomies.
+  sources:
+  - https://elixirmedical.com/wp-json/wp/v2/posts
+- name: applicationPassword
+  type: http
+  scheme: basic
+  description: >-
+    WordPress application passwords, sent as HTTP Basic. The site's discovery document
+    declares the authorization endpoint under `authentication.application-passwords`.
+  authorization_endpoint: https://elixirmedical.com/wp-admin/authorize-application.php
+  sources:
+  - https://elixirmedical.com/wp-json/
+  - openapi/elixir-medical-wordpress-content-openapi.yml
+observations:
+- url: https://elixirmedical.com/wp-json/wp/v2/posts?per_page=1
+  status: 200
+  finding: anonymous read allowed
+- url: https://elixirmedical.com/wp-json/wp/v2/users
+  status: 200
+  finding: >-
+    author list is readable anonymously (WordPress default). Six author records are exposed.
+    Recorded as an observation only; no user data is stored in this repository.
+- url: https://elixirmedical.com/wp-json/wp/v2/settings
+  status: 401
+  finding: 'privileged route rejects anonymous callers with code `rest_forbidden`'
+oauth2: false
+openid_connect: false
+mutual_tls: false

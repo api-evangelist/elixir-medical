@@ -1,0 +1,25 @@
+generated: '2026-08-12'
+method: searched
+source: https://elixirmedical.com/
+plan_count: 0
+note: >-
+  Elixir Medical publishes no API plans, no pricing page and no sign-up of any kind — it
+  sells regulated implantable medical devices through clinical and distributor channels,
+  not through a self-serve developer product. The site has no /pricing, no /plans and no
+  developer portal; the sitemap's 80 pages carry no commercial API surface. The only API
+  it serves (the corporate site's WordPress REST content API) is free and unmetered, and
+  is incidental to the CMS rather than an offering. An honest zero, not an omission.
+plans: []
+sign_up:
+  url: null
+  self_serve: false
+sales_gate: false
+pages_checked:
+- url: https://elixirmedical.com/
+  status: 200
+- url: https://elixirmedical.com/page-sitemap.xml
+  status: 200
+  finding: 80 pages enumerated; no pricing, plans, developer or API page among them
+- url: https://elixirmedical.com/us/contact-us/
+  status: 200
+  finding: general corporate contact form; no API or developer access request

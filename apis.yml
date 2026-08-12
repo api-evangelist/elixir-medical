@@ -1,23 +1,113 @@
 aid: elixir-medical
 name: Elixir Medical
-description: 'Elixir Medical is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Elixir Medical Corporation is a privately held medical device company
+  headquartered in Milpitas, California, developing implant and interventional platforms
+  for coronary and peripheral artery disease. Its DynamX sirolimus-eluting coronary
+  bioadaptor is designed to restore vessel pulsatility and compliance rather than permanently
+  cage the artery, and holds a European CE mark, Japanese PMDA approval and a U.S. FDA
+  Breakthrough Device designation; the LithiX Hertz Contact intravascular lithotripsy
+  system and the DESyne family of drug-eluting stents round out the portfolio. Elixir
+  Medical operates no developer program and publishes no product, device or clinical
+  API. The only machine-readable surface it serves is the default WordPress REST API
+  of its corporate marketing site, alongside an SEO-plugin-generated llms.txt.'
+image: https://elixirmedical.com/wp-content/uploads/2023/09/New-Elixir-Logo.png
 url: https://raw.githubusercontent.com/api-evangelist/elixir-medical/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profile
+x-tier-reason: enrichment
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Medical Devices
+- Health
+- Cardiovascular
+- Coronary Intervention
+- Implants
+- Life Sciences
+- Content
+- WordPress
+apis:
+- aid: elixir-medical-wordpress-content
+  name: Elixir Medical Website Content API (WordPress REST)
+  description: 'The WordPress core REST API (wp/v2 namespace) served by elixirmedical.com,
+    the Elixir Medical corporate website. It exposes the site''s pages, news posts,
+    media library, categories, tags, comments, authors, site custom post types and
+    a search endpoint. Read operations on the content collections were observed to
+    answer anonymously with RFC-5988 pagination links and X-WP-Total / X-WP-TotalPages
+    headers; write operations require WordPress application-password authentication.
+    This is a content-management surface incidental to the marketing site, not a product,
+    device or clinical API — Elixir Medical does not advertise, document or support
+    it, and the OpenAPI in this repository was derived by API Evangelist from the route
+    descriptor the site itself publishes, not by the provider.'
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - Content
+  - WordPress
+  - CMS
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-wordpress-content-openapi.yml
+  - type: Overlay
+    url: overlays/elixir-medical-wordpress-content-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/elixir-medical-domain-security.yml
 - type: Website
+  url: https://elixirmedical.com/
+- type: About
+  url: https://elixirmedical.com/us/about-us/
+- type: Support
+  url: https://elixirmedical.com/us/contact-us/
+- type: Blog
+  url: https://elixirmedical.com/ous/news/
+- type: PrivacyPolicy
+  url: https://elixirmedical.com/us/privacy-policy/
+- type: TermsOfService
+  url: https://elixirmedical.com/us/terms-of-use/
+- type: SecondaryMarket
+  name: Forge Global secondary-market listing
   url: https://forgeglobal.com/elixir-medical_stock/
+- type: LLMsTxt
+  url: llms/elixir-medical-llms.txt
+- type: Lifecycle
+  url: lifecycle/elixir-medical-lifecycle.yml
+- type: Conformance
+  url: conformance/elixir-medical-conformance.yml
+- type: Plans
+  url: plans/elixir-medical-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/elixir-medical-rate-limits.yml
+- type: Authentication
+  url: authentication/elixir-medical-authentication.yml
+- type: ErrorCatalog
+  url: errors/elixir-medical-problem-types.yml
+- type: Conventions
+  url: conventions/elixir-medical-conventions.yml
+- type: DataModel
+  url: data-model/elixir-medical-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-api-surface-class: cms-incidental
+x-api-surface-note: >-
+  Elixir Medical operates no developer program. The single API entry in this profile is
+  the WordPress REST API of its corporate marketing website, which the company neither
+  advertises, documents nor supports. The OpenAPI in this repository was DERIVED by API
+  Evangelist from the route descriptor the site itself serves at /wp-json/wp/v2 — it is
+  not a provider-published contract. No .well-known document, agent card, MCP server,
+  SDK, event surface, status page, changelog, pricing or sign-up exists; each of those
+  absences was probed and recorded rather than assumed, and no pointer was emitted for
+  any of them.
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

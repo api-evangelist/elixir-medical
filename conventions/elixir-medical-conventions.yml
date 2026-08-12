@@ -1,0 +1,118 @@
+generated: '2026-08-12'
+method: probed
+source: https://elixirmedical.com/wp-json/wp/v2
+note: >-
+  Cross-cutting request/response semantics for the only API surface Elixir Medical serves.
+  Everything below was observed on live responses or read from the site's own route
+  descriptor — the company publishes no conventions documentation.
+authentication:
+  style: none-for-read; HTTP Basic application password for write
+  artifact: authentication/elixir-medical-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key is accepted or documented. WordPress REST write operations are not
+    idempotent by contract. NO `Idempotency` pointer is emitted in apis.yml — there is no
+    idempotency contract to point at.
+pagination:
+  style: page-number
+  request_params:
+  - name: page
+    default: 1
+    description: Current page of the collection.
+  - name: per_page
+    default: 10
+    maximum: 100
+    description: Maximum number of items to be returned in the result set.
+  - name: offset
+    description: Offset the result set by a specific number of items.
+  response_headers:
+  - name: X-WP-Total
+    description: Total number of items in the collection.
+    observed_value_example: '52 on /wp/v2/posts'
+  - name: X-WP-TotalPages
+    description: Total number of pages available.
+  link_header:
+    supported: true
+    style: RFC 5988
+    rels:
+    - next
+    - prev
+    example: '<https://elixirmedical.com/wp-json/wp/v2/posts?per_page=1&page=2>; rel="next"'
+field_selection:
+  supported: true
+  params:
+  - name: _fields
+    description: Limit the response to specific fields (WordPress core parameter).
+  - name: context
+    values:
+    - view
+    - embed
+    - edit
+    description: Scope under which the request is made; determines fields present in response.
+  expansion:
+    param: _embed
+    description: Inlines linked resources (author, featured media, terms) under `_embedded`.
+filtering:
+  common_params:
+  - search
+  - after
+  - before
+  - modified_after
+  - modified_before
+  - author
+  - categories
+  - tags
+  - slug
+  - status
+  - order
+  - orderby
+  localization:
+    param: wpml_language
+    values:
+    - ar
+    - en
+    - id
+    - vi
+    description: >-
+      WPML language selector, present on every wp/v2 route on this install. The site is
+      published in Arabic, English, Indonesian and Vietnamese.
+metadata:
+  supported: true
+  field: meta
+  note: Exposed on content objects; contents are plugin-defined on this install.
+request_tracing:
+  request_id_header: null
+  note: No request-id or correlation header was observed on any response.
+versioning:
+  scheme: uri-path namespace
+  current: wp/v2
+  discovery: https://elixirmedical.com/wp-json/
+  namespaces_advertised: 43
+  note: >-
+    Versioning is WordPress's, not Elixir Medical's — the company has no published
+    versioning policy. See lifecycle/elixir-medical-lifecycle.yml.
+error_envelope:
+  artifact: errors/elixir-medical-problem-types.yml
+  shape: '{code, message, data:{status}}'
+  rfc9457: false
+rate_limit_signaling:
+  headers_observed: []
+  artifact: rate-limits/elixir-medical-rate-limits.yml
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was present on any observed
+    response. See the rate-limits artifact.
+caching:
+  headers_observed:
+  - name: Cache-Control
+    value: max-age=600, must-revalidate
+    scope: anonymous content reads
+  - name: Cache-Control
+    value: max-age=0, must-revalidate, private
+    scope: privileged routes
+  cdn: WP Engine
+allow_header:
+  observed: true
+  example: 'allow: GET'
+  note: Advertises the methods available to the CURRENT (anonymous) identity, not all methods.

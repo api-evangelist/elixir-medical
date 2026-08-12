@@ -1,0 +1,38 @@
+generated: '2026-08-12'
+method: probed
+source: https://elixirmedical.com/wp-json/
+note: >-
+  Elixir Medical publishes no API versioning policy, no deprecation policy, no SLA and no
+  status page — it runs no developer program. The versioning below is WordPress's own
+  namespace scheme, observed on the live discovery document. NO `StatusPage` and NO
+  `Deprecation` pointer is emitted in apis.yml, because neither surface exists.
+versioning:
+  scheme: uri-path-namespace
+  current: wp/v2
+  discovery: https://elixirmedical.com/wp-json/
+  policy_url: null
+  owner: WordPress core (not provider-defined)
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: No RFC 8594 Sunset or Deprecation header was observed on any response.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - url: https://status.elixirmedical.com/
+    resolves: false
+changelog:
+  url: null
+  note: >-
+    The company publishes dated press releases at https://elixirmedical.com/ous/news/,
+    but they are clinical and corporate announcements, not an API changelog. No
+    `ChangeLog` pointer is emitted.
+deprecated_operations: []
+freshness:
+  content_last_modified: '2026-07-06'
+  source: https://elixirmedical.com/sitemap_index.xml
+  note: Most recent post-sitemap lastmod at time of probe.

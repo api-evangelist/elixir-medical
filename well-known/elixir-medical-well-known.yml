@@ -1,0 +1,69 @@
+generated: '2026-08-12'
+method: probed
+source: live GET probes
+host: https://elixirmedical.com
+note: >-
+  Every /.well-known/ path probed on the only reachable Elixir Medical host returned 404.
+  api.elixirmedical.com, developer.elixirmedical.com and docs.elixirmedical.com do not
+  resolve at all. This file records a verified ABSENCE — no WellKnown, SecurityTxt or
+  AgentCard pointer is emitted in apis.yml, because the provider serves none of these
+  documents. Note that several 404 responses are large WordPress HTML error pages rather
+  than a bare 404 body; none carries a document.
+documents:
+- path: /.well-known/security.txt
+  status: 404
+  content_type: text/html
+  file: null
+- path: /.well-known/openid-configuration
+  status: 404
+  content_type: text/html
+  file: null
+- path: /.well-known/oauth-authorization-server
+  status: 404
+  content_type: text/html
+  file: null
+- path: /.well-known/api-catalog
+  status: 404
+  content_type: text/html
+  file: null
+- path: /.well-known/ai-plugin.json
+  status: 404
+  content_type: text/html
+  file: null
+- path: /.well-known/agent-card.json
+  status: 404
+  content_type: text/html
+  file: null
+- path: /.well-known/agent.json
+  status: 404
+  content_type: text/html
+  file: null
+hosts_probed:
+- host: elixirmedical.com
+  resolves: true
+- host: www.elixirmedical.com
+  resolves: true
+- host: api.elixirmedical.com
+  resolves: false
+- host: developer.elixirmedical.com
+  resolves: false
+- host: docs.elixirmedical.com
+  resolves: false
+related_probes:
+- url: https://elixirmedical.com/llms.txt
+  status: 200
+  finding: 'served — captured verbatim at llms/elixir-medical-llms.txt'
+- url: https://elixirmedical.com/robots.txt
+  status: 200
+  finding: 'served but zero bytes — no directives, nothing disallowed'
+- url: https://elixirmedical.com/sitemap_index.xml
+  status: 200
+  finding: 'Yoast sitemap index, 13 child sitemaps'
+- url: https://elixirmedical.com/openapi.json
+  status: 404
+- url: https://elixirmedical.com/swagger.json
+  status: 404
+- url: https://elixirmedical.com/api-docs
+  status: 404
+- url: https://elixirmedical.com/graphql
+  status: 404

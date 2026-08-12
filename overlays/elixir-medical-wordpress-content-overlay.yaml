@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Elixir Medical Website Content API
+  version: 1.0.0
+extends: openapi/elixir-medical-wordpress-content-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-note: >-
+  Captures API Evangelist's annotations on top of the derived contract. The base document
+  is itself derived from the route descriptor elixirmedical.com publishes at
+  /wp-json/wp/v2; this overlay carries only our editorial and provenance metadata so the
+  derived spec is never mutated in place.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-profile: https://apis.io/provider/elixir-medical/
+    x-apievangelist-surface-class: cms-incidental
+    x-apievangelist-provider-publishes-spec: false
+    x-apievangelist-developer-program: false
+- target: $.paths['/wp/v2/posts'].get
+  update:
+    x-apievangelist-note: >-
+      Primary discovery entry point. Carries Elixir Medical's press releases, clinical
+      trial result summaries and open job postings — all three share the `post` type on
+      this install, so filter by `categories` to separate them.
+- target: $.paths['/wp/v2/wpfm_locations'].get
+  update:
+    x-apievangelist-note: >-
+      The one domain-specific entity on this surface: the custom post type backing the
+      site's "Find a Doctor" locator.
+- target: $.paths['/wp/v2/users'].get
+  update:
+    x-apievangelist-note: >-
+      Anonymous author enumeration is enabled (WordPress default). Recorded as an
+      observation for the provider's benefit; API Evangelist stores no user records.
+- target: $.components.securitySchemes.applicationPassword
+  update:
+    x-apievangelist-note: >-
+      Declared by the site's own /wp-json discovery document under
+      authentication.application-passwords. Write operations were never exercised.
