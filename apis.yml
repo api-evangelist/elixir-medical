@@ -30,35 +30,144 @@ tags:
 - Content
 - WordPress
 apis:
-- aid: elixir-medical-wordpress-content
-  name: Elixir Medical Website Content API (WordPress REST)
-  description: 'The WordPress core REST API (wp/v2 namespace) served by elixirmedical.com,
-    the Elixir Medical corporate website. It exposes the site''s pages, news posts,
-    media library, categories, tags, comments, authors, site custom post types and
-    a search endpoint. Read operations on the content collections were observed to
-    answer anonymously with RFC-5988 pagination links and X-WP-Total / X-WP-TotalPages
-    headers; write operations require WordPress application-password authentication.
-    This is a content-management surface incidental to the marketing site, not a product,
-    device or clinical API — Elixir Medical does not advertise, document or support
-    it, and the OpenAPI in this repository was derived by API Evangelist from the route
-    descriptor the site itself publishes, not by the provider.'
+- aid: elixir-medical:elixir-medical-categories-api
+  name: Elixir Medical Categories API
+  description: The categories API from Elixir Medical — 2 operation(s) for categories.
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
-  - Content
-  - WordPress
-  - CMS
+  - categories
   properties:
   - type: OpenAPI
-    url: openapi/elixir-medical-wordpress-content-openapi.yml
-  - type: Overlay
-    url: overlays/elixir-medical-wordpress-content-overlay.yaml
+    url: openapi/elixir-medical-categories-api-openapi.yml
+- aid: elixir-medical:elixir-medical-comments-api
+  name: Elixir Medical Comments API
+  description: The comments API from Elixir Medical — 2 operation(s) for comments.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - comments
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-comments-api-openapi.yml
+- aid: elixir-medical:elixir-medical-media-api
+  name: Elixir Medical Media API
+  description: The media API from Elixir Medical — 4 operation(s) for media.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - media
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-media-api-openapi.yml
+- aid: elixir-medical:elixir-medical-pages-api
+  name: Elixir Medical Pages API
+  description: The pages API from Elixir Medical — 6 operation(s) for pages.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - pages
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-pages-api-openapi.yml
+- aid: elixir-medical:elixir-medical-posts-api
+  name: Elixir Medical Posts API
+  description: The posts API from Elixir Medical — 6 operation(s) for posts.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - posts
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-posts-api-openapi.yml
+- aid: elixir-medical:elixir-medical-search-api
+  name: Elixir Medical Search API
+  description: The search API from Elixir Medical — 1 operation(s) for search.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-search-api-openapi.yml
+- aid: elixir-medical:elixir-medical-statuses-api
+  name: Elixir Medical Statuses API
+  description: The statuses API from Elixir Medical — 2 operation(s) for statuses.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - statuses
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-statuses-api-openapi.yml
+- aid: elixir-medical:elixir-medical-tags-api
+  name: Elixir Medical Tags API
+  description: The tags API from Elixir Medical — 2 operation(s) for tags.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - tags
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-tags-api-openapi.yml
+- aid: elixir-medical:elixir-medical-taxonomies-api
+  name: Elixir Medical Taxonomies API
+  description: The taxonomies API from Elixir Medical — 2 operation(s) for taxonomies.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - taxonomies
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-taxonomies-api-openapi.yml
+- aid: elixir-medical:elixir-medical-types-api
+  name: Elixir Medical Types API
+  description: The types API from Elixir Medical — 2 operation(s) for types.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - types
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-types-api-openapi.yml
+- aid: elixir-medical:elixir-medical-users-api
+  name: Elixir Medical Users API
+  description: The users API from Elixir Medical — 6 operation(s) for users.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-users-api-openapi.yml
+- aid: elixir-medical:elixir-medical-wpfm-designations-api
+  name: Elixir Medical Wpfm Designations API
+  description: The wpfm_designations API from Elixir Medical — 2 operation(s) for wpfm_designations.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - wpfm_designations
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-wpfm-designations-api-openapi.yml
+- aid: elixir-medical:elixir-medical-wpfm-locations-api
+  name: Elixir Medical Wpfm Locations API
+  description: The wpfm_locations API from Elixir Medical — 2 operation(s) for wpfm_locations.
+  humanURL: https://elixirmedical.com/
+  baseURL: https://elixirmedical.com/wp-json
+  tags:
+  - wpfm_locations
+  properties:
+  - type: OpenAPI
+    url: openapi/elixir-medical-wpfm-locations-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/elixir-medical-wordpress-content-overlay.yaml
 - type: DomainSecurity
   url: security/elixir-medical-domain-security.yml
 - type: Website
