@@ -1,0 +1,735 @@
+openapi: 3.2.0
+info:
+  title: Elixir Medical Website Content API (WordPress REST wp/v2) Comments API
+  version: wp/v2
+  description: 'Read/write REST surface exposed by elixirmedical.com, the corporate website of Elixir Medical Corporation. This is the WordPress core REST API (`wp/v2` namespace) served by the marketing site — it carries pages, posts, media, taxonomies and the site''s custom post types. It is NOT a product, device, or clinical API, and Elixir Medical does not operate a developer program or publish this contract.
+
+
+    PROVENANCE: this document was DERIVED by API Evangelist from the route-descriptor document the site itself serves at https://elixirmedical.com/wp-json/wp/v2. Every path, HTTP method, parameter name, type, default and enum below is a verbatim transcription of that descriptor. Nothing was invented. Response schemas are intentionally left open ({}) because the descriptor does not publish them.
+
+
+    This document models the CONTENT surface of the namespace (posts, pages, media, categories, tags, comments, users, search, types, taxonomies, statuses, and the site custom post types). The remaining descriptor routes are WordPress editor/admin plumbing and are preserved verbatim in openapi/_original/elixir-medical-wp-v2-routes.json.
+
+
+    Read operations on content collections were observed to answer anonymously; write operations require WordPress application-password authentication.'
+  contact:
+    name: Elixir Medical
+    email: info@elixirmedical.com
+    url: https://elixirmedical.com/us/contact-us/
+  x-derived-by: API Evangelist enrichment pipeline
+  x-derived-from: https://elixirmedical.com/wp-json/wp/v2
+  x-not-published-by-provider: true
+servers:
+- url: https://elixirmedical.com/wp-json
+tags:
+- name: comments
+paths:
+  /wp/v2/comments:
+    get:
+      operationId: getComments
+      tags:
+      - comments
+      summary: GET /wp/v2/comments
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to comments published after a given ISO8601 compliant date.
+      - name: author
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Limit result set to comments assigned to specific user IDs. Requires authorization.
+      - name: author_exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Ensure result set excludes comments assigned to specific user IDs. Requires authorization.
+      - name: author_email
+        in: query
+        required: false
+        schema:
+          type: string
+          format: email
+        description: Limit result set to that from a specific author email. Requires authorization.
+      - name: before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to comments published before a given ISO8601 compliant date.
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes specific IDs.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to specific IDs.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset the result set by a specific number of items.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - date
+          - date_gmt
+          - id
+          - include
+          - post
+          - parent
+          - type
+          default: date_gmt
+        description: Sort collection by comment attribute.
+      - name: parent
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to comments of specific parent IDs.
+      - name: parent_exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes specific parent IDs.
+      - name: post
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to comments assigned to specific post IDs.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          default: approve
+        description: Limit result set to comments assigned a specific status. Requires authorization.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          default: comment
+        description: Limit result set to comments assigned a specific type. Requires authorization.
+      - name: password
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The password for the post if it is password protected.
+      - name: wpml_language
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ar
+          - en
+          - id
+          - vi
+        description: WPML's language code
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id (`rest_no_route` / `rest_*_invalid_id`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    post:
+      operationId: createComments
+      tags:
+      - comments
+      summary: POST /wp/v2/comments
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: integer
+                  description: The ID of the user object, if author was a user.
+                author_email:
+                  type: string
+                  format: email
+                  description: Email address for the comment author.
+                author_ip:
+                  type: string
+                  format: ip
+                  description: IP address for the comment author.
+                author_name:
+                  type: string
+                  description: Display name for the comment author.
+                author_url:
+                  type: string
+                  format: uri
+                  description: URL for the comment author.
+                author_user_agent:
+                  type: string
+                  description: User agent for the comment author.
+                content:
+                  type: object
+                  description: The content for the comment.
+                date:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, in the site's timezone.
+                date_gmt:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, as GMT.
+                parent:
+                  type: integer
+                  default: 0
+                  description: The ID for the parent of the comment.
+                post:
+                  type: integer
+                  default: 0
+                  description: The ID of the associated post object.
+                status:
+                  type: string
+                  description: State of the comment.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wp/v2/comments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: Path segment matched by the pattern `[\d]+` in the published route descriptor.
+      schema:
+        type: integer
+    get:
+      operationId: getCommentsId
+      tags:
+      - comments
+      summary: GET /wp/v2/comments/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: password
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The password for the parent post of the comment (if the post is password protected).
+      - name: wpml_language
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ar
+          - en
+          - id
+          - vi
+        description: WPML's language code
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id (`rest_no_route` / `rest_*_invalid_id`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    post:
+      operationId: createCommentsId
+      tags:
+      - comments
+      summary: POST /wp/v2/comments/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: integer
+                  description: The ID of the user object, if author was a user.
+                author_email:
+                  type: string
+                  format: email
+                  description: Email address for the comment author.
+                author_ip:
+                  type: string
+                  format: ip
+                  description: IP address for the comment author.
+                author_name:
+                  type: string
+                  description: Display name for the comment author.
+                author_url:
+                  type: string
+                  format: uri
+                  description: URL for the comment author.
+                author_user_agent:
+                  type: string
+                  description: User agent for the comment author.
+                content:
+                  type: object
+                  description: The content for the comment.
+                date:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, in the site's timezone.
+                date_gmt:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, as GMT.
+                parent:
+                  type: integer
+                  description: The ID for the parent of the comment.
+                post:
+                  type: integer
+                  description: The ID of the associated post object.
+                status:
+                  type: string
+                  description: State of the comment.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    put:
+      operationId: replaceCommentsId
+      tags:
+      - comments
+      summary: PUT /wp/v2/comments/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: integer
+                  description: The ID of the user object, if author was a user.
+                author_email:
+                  type: string
+                  format: email
+                  description: Email address for the comment author.
+                author_ip:
+                  type: string
+                  format: ip
+                  description: IP address for the comment author.
+                author_name:
+                  type: string
+                  description: Display name for the comment author.
+                author_url:
+                  type: string
+                  format: uri
+                  description: URL for the comment author.
+                author_user_agent:
+                  type: string
+                  description: User agent for the comment author.
+                content:
+                  type: object
+                  description: The content for the comment.
+                date:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, in the site's timezone.
+                date_gmt:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, as GMT.
+                parent:
+                  type: integer
+                  description: The ID for the parent of the comment.
+                post:
+                  type: integer
+                  description: The ID of the associated post object.
+                status:
+                  type: string
+                  description: State of the comment.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    patch:
+      operationId: updateCommentsId
+      tags:
+      - comments
+      summary: PATCH /wp/v2/comments/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: integer
+                  description: The ID of the user object, if author was a user.
+                author_email:
+                  type: string
+                  format: email
+                  description: Email address for the comment author.
+                author_ip:
+                  type: string
+                  format: ip
+                  description: IP address for the comment author.
+                author_name:
+                  type: string
+                  description: Display name for the comment author.
+                author_url:
+                  type: string
+                  format: uri
+                  description: URL for the comment author.
+                author_user_agent:
+                  type: string
+                  description: User agent for the comment author.
+                content:
+                  type: object
+                  description: The content for the comment.
+                date:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, in the site's timezone.
+                date_gmt:
+                  type: string
+                  format: date-time
+                  description: The date the comment was published, as GMT.
+                parent:
+                  type: integer
+                  description: The ID for the parent of the comment.
+                post:
+                  type: integer
+                  description: The ID of the associated post object.
+                status:
+                  type: string
+                  description: State of the comment.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    delete:
+      operationId: deleteCommentsId
+      tags:
+      - comments
+      summary: DELETE /wp/v2/comments/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  default: false
+                  description: Whether to bypass Trash and force deletion.
+                password:
+                  type: string
+                  description: The password for the parent post of the comment (if the post is password protected).
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_no_route
+          - rest_forbidden
+          - rest_post_invalid_id
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress application passwords. The site's own discovery document declares the authorization endpoint at https://elixirmedical.com/wp-admin/authorize-application.php

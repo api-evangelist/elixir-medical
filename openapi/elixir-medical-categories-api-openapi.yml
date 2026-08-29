@@ -1,0 +1,548 @@
+openapi: 3.2.0
+info:
+  title: Elixir Medical Website Content API (WordPress REST wp/v2) Categories API
+  version: wp/v2
+  description: 'Read/write REST surface exposed by elixirmedical.com, the corporate website of Elixir Medical Corporation. This is the WordPress core REST API (`wp/v2` namespace) served by the marketing site — it carries pages, posts, media, taxonomies and the site''s custom post types. It is NOT a product, device, or clinical API, and Elixir Medical does not operate a developer program or publish this contract.
+
+
+    PROVENANCE: this document was DERIVED by API Evangelist from the route-descriptor document the site itself serves at https://elixirmedical.com/wp-json/wp/v2. Every path, HTTP method, parameter name, type, default and enum below is a verbatim transcription of that descriptor. Nothing was invented. Response schemas are intentionally left open ({}) because the descriptor does not publish them.
+
+
+    This document models the CONTENT surface of the namespace (posts, pages, media, categories, tags, comments, users, search, types, taxonomies, statuses, and the site custom post types). The remaining descriptor routes are WordPress editor/admin plumbing and are preserved verbatim in openapi/_original/elixir-medical-wp-v2-routes.json.
+
+
+    Read operations on content collections were observed to answer anonymously; write operations require WordPress application-password authentication.'
+  contact:
+    name: Elixir Medical
+    email: info@elixirmedical.com
+    url: https://elixirmedical.com/us/contact-us/
+  x-derived-by: API Evangelist enrichment pipeline
+  x-derived-from: https://elixirmedical.com/wp-json/wp/v2
+  x-not-published-by-provider: true
+servers:
+- url: https://elixirmedical.com/wp-json
+tags:
+- name: categories
+paths:
+  /wp/v2/categories:
+    get:
+      operationId: getCategories
+      tags:
+      - categories
+      summary: GET /wp/v2/categories
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes specific IDs.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to specific IDs.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - id
+          - include
+          - name
+          - slug
+          - include_slugs
+          - term_group
+          - description
+          - count
+          default: name
+        description: Sort collection by term attribute.
+      - name: hide_empty
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: Whether to hide terms not assigned to any posts.
+      - name: parent
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Limit result set to terms assigned to a specific parent.
+      - name: post
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Limit result set to terms assigned to a specific post.
+      - name: slug
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Limit result set to terms with one or more specific slugs.
+      - name: wpml_language
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ar
+          - en
+          - id
+          - vi
+        description: WPML's language code
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id (`rest_no_route` / `rest_*_invalid_id`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    post:
+      operationId: createCategories
+      tags:
+      - categories
+      summary: POST /wp/v2/categories
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: HTML description of the term.
+                name:
+                  type: string
+                  description: HTML title for the term.
+                slug:
+                  type: string
+                  description: An alphanumeric identifier for the term unique to its type.
+                parent:
+                  type: integer
+                  description: The parent term ID.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+              required:
+              - name
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wp/v2/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: Path segment matched by the pattern `[\d]+` in the published route descriptor.
+      schema:
+        type: integer
+    get:
+      operationId: getCategoriesId
+      tags:
+      - categories
+      summary: GET /wp/v2/categories/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: wpml_language
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ar
+          - en
+          - id
+          - vi
+        description: WPML's language code
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id (`rest_no_route` / `rest_*_invalid_id`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    post:
+      operationId: createCategoriesId
+      tags:
+      - categories
+      summary: POST /wp/v2/categories/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: HTML description of the term.
+                name:
+                  type: string
+                  description: HTML title for the term.
+                slug:
+                  type: string
+                  description: An alphanumeric identifier for the term unique to its type.
+                parent:
+                  type: integer
+                  description: The parent term ID.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    put:
+      operationId: replaceCategoriesId
+      tags:
+      - categories
+      summary: PUT /wp/v2/categories/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: HTML description of the term.
+                name:
+                  type: string
+                  description: HTML title for the term.
+                slug:
+                  type: string
+                  description: An alphanumeric identifier for the term unique to its type.
+                parent:
+                  type: integer
+                  description: The parent term ID.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    patch:
+      operationId: updateCategoriesId
+      tags:
+      - categories
+      summary: PATCH /wp/v2/categories/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: HTML description of the term.
+                name:
+                  type: string
+                  description: HTML title for the term.
+                slug:
+                  type: string
+                  description: An alphanumeric identifier for the term unique to its type.
+                parent:
+                  type: integer
+                  description: The parent term ID.
+                meta:
+                  type: object
+                  description: Meta fields.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+    delete:
+      operationId: deleteCategoriesId
+      tags:
+      - categories
+      summary: DELETE /wp/v2/categories/{id}
+      description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  default: false
+                  description: Required to be true, as terms do not support trashing.
+                wpml_language:
+                  type: string
+                  enum:
+                  - ar
+                  - en
+                  - id
+                  - vi
+                  description: WPML's language code
+      security:
+      - applicationPassword: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required (`rest_forbidden`)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '403':
+          description: Not permitted for this identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: No route or invalid id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_no_route
+          - rest_forbidden
+          - rest_post_invalid_id
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress application passwords. The site's own discovery document declares the authorization endpoint at https://elixirmedical.com/wp-admin/authorize-application.php

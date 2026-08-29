@@ -1,0 +1,31 @@
+{
+  "provider": "elixir-medical",
+  "sources": [
+    "elixir-medical-wordpress-content-openapi.yml"
+  ],
+  "outputs": [
+    "elixir-medical-categories-api-openapi.yml",
+    "elixir-medical-comments-api-openapi.yml",
+    "elixir-medical-media-api-openapi.yml",
+    "elixir-medical-pages-api-openapi.yml",
+    "elixir-medical-posts-api-openapi.yml",
+    "elixir-medical-search-api-openapi.yml",
+    "elixir-medical-statuses-api-openapi.yml",
+    "elixir-medical-tags-api-openapi.yml",
+    "elixir-medical-taxonomies-api-openapi.yml",
+    "elixir-medical-types-api-openapi.yml",
+    "elixir-medical-users-api-openapi.yml",
+    "elixir-medical-wpfm-designations-api-openapi.yml",
+    "elixir-medical-wpfm-locations-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/elixir-medical-wordpress-content-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "elixir-medical-wordpress-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+13 apis, 13 total)"
+  ],
+  "skipped": []
+}
