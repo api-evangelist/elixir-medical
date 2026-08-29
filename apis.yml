@@ -10,6 +10,18 @@ description: 'Elixir Medical Corporation is a privately held medical device comp
   Medical operates no developer program and publishes no product, device or clinical
   API. The only machine-readable surface it serves is the default WordPress REST API
   of its corporate marketing site, alongside an SEO-plugin-generated llms.txt.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://elixirmedical.com/wp-content/uploads/2023/09/New-Elixir-Logo.png
 url: https://raw.githubusercontent.com/api-evangelist/elixir-medical/refs/heads/main/apis.yml
 x-type: company
