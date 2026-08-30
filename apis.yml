@@ -48,6 +48,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Categories
+  tags_raw:
   - categories
   properties:
   - type: OpenAPI
@@ -58,6 +60,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Comments
+  tags_raw:
   - comments
   properties:
   - type: OpenAPI
@@ -68,6 +72,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Media
+  tags_raw:
   - media
   properties:
   - type: OpenAPI
@@ -78,6 +84,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Pages
+  tags_raw:
   - pages
   properties:
   - type: OpenAPI
@@ -88,6 +96,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Posts
+  tags_raw:
   - posts
   properties:
   - type: OpenAPI
@@ -98,6 +108,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -108,6 +120,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Status
+  tags_raw:
   - statuses
   properties:
   - type: OpenAPI
@@ -118,6 +132,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Tags
+  tags_raw:
   - tags
   properties:
   - type: OpenAPI
@@ -138,6 +154,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - Types
+  tags_raw:
   - types
   properties:
   - type: OpenAPI
@@ -148,6 +166,8 @@ apis:
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -157,7 +177,8 @@ apis:
   description: The wpfm_designations API from Elixir Medical — 2 operation(s) for wpfm_designations.
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
-  tags:
+  tags: []
+  tags_raw:
   - wpfm_designations
   properties:
   - type: OpenAPI
@@ -167,7 +188,8 @@ apis:
   description: The wpfm_locations API from Elixir Medical — 2 operation(s) for wpfm_locations.
   humanURL: https://elixirmedical.com/
   baseURL: https://elixirmedical.com/wp-json
-  tags:
+  tags: []
+  tags_raw:
   - wpfm_locations
   properties:
   - type: OpenAPI
