@@ -1,17 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Elixir Medical Website Content API (WordPress REST wp/v2) Search API
+  title: Elixir Medical Website Content API (WordPress REST wp/v2)…
   version: wp/v2
-  description: 'Read/write REST surface exposed by elixirmedical.com, the corporate website of Elixir Medical Corporation. This is the WordPress core REST API (`wp/v2` namespace) served by the marketing site — it carries pages, posts, media, taxonomies and the site''s custom post types. It is NOT a product, device, or clinical API, and Elixir Medical does not operate a developer program or publish this contract.
-
-
-    PROVENANCE: this document was DERIVED by API Evangelist from the route-descriptor document the site itself serves at https://elixirmedical.com/wp-json/wp/v2. Every path, HTTP method, parameter name, type, default and enum below is a verbatim transcription of that descriptor. Nothing was invented. Response schemas are intentionally left open ({}) because the descriptor does not publish them.
-
-
-    This document models the CONTENT surface of the namespace (posts, pages, media, categories, tags, comments, users, search, types, taxonomies, statuses, and the site custom post types). The remaining descriptor routes are WordPress editor/admin plumbing and are preserved verbatim in openapi/_original/elixir-medical-wp-v2-routes.json.
-
-
-    Read operations on content collections were observed to answer anonymously; write operations require WordPress application-password authentication.'
+  description: Read/write REST surface exposed by elixirmedical.com, the corporate website of Elixir Medical Corporation.
   contact:
     name: Elixir Medical
     email: info@elixirmedical.com
@@ -22,13 +13,13 @@ info:
 servers:
 - url: https://elixirmedical.com/wp-json
 tags:
-- name: search
+- name: Search
 paths:
   /wp/v2/search:
     get:
       operationId: getSearch
       tags:
-      - search
+      - Search
       summary: GET /wp/v2/search
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:

@@ -1,17 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Elixir Medical Website Content API (WordPress REST wp/v2) Pages API
+  title: Elixir Medical Website Content API (WordPress REST wp/v2)…
   version: wp/v2
-  description: 'Read/write REST surface exposed by elixirmedical.com, the corporate website of Elixir Medical Corporation. This is the WordPress core REST API (`wp/v2` namespace) served by the marketing site — it carries pages, posts, media, taxonomies and the site''s custom post types. It is NOT a product, device, or clinical API, and Elixir Medical does not operate a developer program or publish this contract.
-
-
-    PROVENANCE: this document was DERIVED by API Evangelist from the route-descriptor document the site itself serves at https://elixirmedical.com/wp-json/wp/v2. Every path, HTTP method, parameter name, type, default and enum below is a verbatim transcription of that descriptor. Nothing was invented. Response schemas are intentionally left open ({}) because the descriptor does not publish them.
-
-
-    This document models the CONTENT surface of the namespace (posts, pages, media, categories, tags, comments, users, search, types, taxonomies, statuses, and the site custom post types). The remaining descriptor routes are WordPress editor/admin plumbing and are preserved verbatim in openapi/_original/elixir-medical-wp-v2-routes.json.
-
-
-    Read operations on content collections were observed to answer anonymously; write operations require WordPress application-password authentication.'
+  description: Read/write REST surface exposed by elixirmedical.com, the corporate website of Elixir Medical Corporation.
   contact:
     name: Elixir Medical
     email: info@elixirmedical.com
@@ -22,13 +13,13 @@ info:
 servers:
 - url: https://elixirmedical.com/wp-json
 tags:
-- name: pages
+- name: Pages
 paths:
   /wp/v2/pages:
     get:
       operationId: getPages
       tags:
-      - pages
+      - Pages
       summary: GET /wp/v2/pages
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:
@@ -274,7 +265,7 @@ paths:
     post:
       operationId: createPages
       tags:
-      - pages
+      - Pages
       summary: POST /wp/v2/pages
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -396,7 +387,7 @@ paths:
     get:
       operationId: getPagesId
       tags:
-      - pages
+      - Pages
       summary: GET /wp/v2/pages/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:
@@ -455,7 +446,7 @@ paths:
     post:
       operationId: createPagesId
       tags:
-      - pages
+      - Pages
       summary: POST /wp/v2/pages/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -569,7 +560,7 @@ paths:
     put:
       operationId: replacePagesId
       tags:
-      - pages
+      - Pages
       summary: PUT /wp/v2/pages/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -683,7 +674,7 @@ paths:
     patch:
       operationId: updatePagesId
       tags:
-      - pages
+      - Pages
       summary: PATCH /wp/v2/pages/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -797,7 +788,7 @@ paths:
     delete:
       operationId: deletePagesId
       tags:
-      - pages
+      - Pages
       summary: DELETE /wp/v2/pages/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -856,7 +847,7 @@ paths:
     get:
       operationId: getPagesParentRevisions
       tags:
-      - pages
+      - Pages
       summary: GET /wp/v2/pages/{parent}/revisions
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:
@@ -988,7 +979,7 @@ paths:
     get:
       operationId: getPagesParentRevisionsId
       tags:
-      - pages
+      - Pages
       summary: GET /wp/v2/pages/{parent}/revisions/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:
@@ -1035,7 +1026,7 @@ paths:
     delete:
       operationId: deletePagesParentRevisionsId
       tags:
-      - pages
+      - Pages
       summary: DELETE /wp/v2/pages/{parent}/revisions/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -1094,7 +1085,7 @@ paths:
     get:
       operationId: getPagesIdAutosaves
       tags:
-      - pages
+      - Pages
       summary: GET /wp/v2/pages/{id}/autosaves
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:
@@ -1147,7 +1138,7 @@ paths:
     post:
       operationId: createPagesIdAutosaves
       tags:
-      - pages
+      - Pages
       summary: POST /wp/v2/pages/{id}/autosaves
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       requestBody:
@@ -1275,7 +1266,7 @@ paths:
     get:
       operationId: getPagesParentAutosavesId
       tags:
-      - pages
+      - Pages
       summary: GET /wp/v2/pages/{parent}/autosaves/{id}
       description: Derived from the WordPress REST route descriptor published at https://elixirmedical.com/wp-json/wp/v2. Parameter names, types, defaults and enums are verbatim from that descriptor.
       parameters:

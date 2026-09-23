@@ -1,7 +1,7 @@
 {
   "provider": "elixir-medical",
   "sources": [
-    "elixir-medical-wordpress-content-openapi.yml"
+    "_ae-authored/elixir-medical-wordpress-content-openapi.yml"
   ],
   "outputs": [
     "elixir-medical-categories-api-openapi.yml",
@@ -18,14 +18,27 @@
     "elixir-medical-wpfm-designations-api-openapi.yml",
     "elixir-medical-wpfm-locations-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/elixir-medical-wordpress-content-openapi.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "elixir-medical-wordpress-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: written (+13 apis, 13 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "elixir-medical-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-posts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-statuses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-taxonomies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-wpfm-designations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "elixir-medical-wpfm-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
