@@ -64,5 +64,112 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Elixir Medical is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/elixir-medical_stock/
+Elixir Medical Corporation is a privately held medical device company headquartered in Milpitas, California, developing implant and interventional platforms for coronary and peripheral artery disease. Its DynamX sirolimus-eluting coronary bioadaptor is designed to restore vessel pulsatility and compliance rather than permanently cage the artery, and holds a European CE mark, Japanese PMDA approval and a U.S. FDA Breakthrough Device designation; the LithiX Hertz Contact intravascular lithotripsy system and the DESyne family of drug-eluting stents round out the portfolio. Elixir Medical operates no developer program and publishes no product, device or clinical API. The only machine-readable surface it serves is the default WordPress REST API of its corporate marketing site, alongside an SEO-plugin-generated llms.txt.
+
+**Areas:** Company · Medical Devices · Health · Cardiovascular · Coronary Intervention · Implants · Life Sciences · Content · WordPress
+
+## Elixir Medical on APIs.io
+
+Everything profiled for Elixir Medical is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/elixir-medical/](https://apis.io/providers/elixir-medical/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Elixir Medical Website (WordPress REST)](https://apis.io/apis/elixir-medical/elixirmedical-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Elixir Medical website at elixirmedical.com: the route index of the site's content management system,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [Elixir Medical Website Content API (WordPress REST wp/v2)](https://apis.io/collections/elixir-medical/open-elixir-medical-wordpress-content/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Elixir Medical Wordpress Content Overlay](https://apis.io/overlays/elixir-medical/elixir-medical-wordpress-content-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Elixir Medical Authentication](https://apis.io/security/elixir-medical/elixir-medical-authentication/)
+- [Elixir Medical Domain Security](https://apis.io/security/elixir-medical/elixir-medical-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Elixir Medical Plans Pricing](https://apis.io/plans/elixir-medical/elixir-medical-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Elixir Medical Rate Limits](https://apis.io/rate-limits/elixir-medical/elixir-medical-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://elixirmedical.com/)
+- [Support](https://elixirmedical.com/us/contact-us/)
+- [Blog](https://elixirmedical.com/ous/news/)
+- [Terms of service](https://elixirmedical.com/us/terms-of-use/)
+- [Privacy policy](https://elixirmedical.com/us/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 18.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 1.7 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 21.1 |
+
+**Agent readiness 8.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.5** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/elixir-medical/](https://apis.io/providers/elixir-medical/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Elixir Medical: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/elixir-medical/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
